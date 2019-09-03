@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebHook;
+using System.Net;
+using System.IO;
+using System.Net.Http;
+using Aspose.Pdf.Operators;
+
+namespace WebHook.Controllers
+{
+    public class WebhooksController : Controller
+    {
+        public object RequestConstants { get; private set; }
+        // GET: Webhooks
+        public string GetREleases(string url)
+        {
+            var client = new WebClient();
+            client.Headers.Add(RequestConstants.UserAgent, RequestConstants.UserAgentValue);
+            var response = client.DownloadString(url);
+            return response; 
+        }
+        private static readonly HttpClient httpClient;
+
+        
+
+        //static GoodController()
+        //{
+        //    httpClient = new HttpClient();
+        //}
+
+        public ActionResult Index()
+        {
+            WebHook.GetProjects();
+            return View();
+            
+        }
+        
+    }
+}
